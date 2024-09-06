@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Streamify Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A frontend application that displays an analytics dashboard for a fictional music streaming service called "Streamify." The dashboard presents key metrics and data visualizations, allowing the service's management team to gain insights into user activity, revenue, and content performance. The application is built with React and TailwindCSS, providing a modern, responsive, and visually appealing user interface.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Dashboard Overview
+The dashboard includes the following sections:
 
-### `npm start`
+- **Key Metrics**
+  - **Total Users**: Displays the total number of registered users on the platform.
+  - **Active Users**: Shows the number of users who have streamed at least one song in the last 30 days.
+  - **Total Streams**: Displays the total number of song streams on the platform.
+  - **Revenue**: Shows the total revenue generated from subscriptions and advertisements.
+  - **Top Artist**: Displays the artist with the most streams in the past 30 days.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Data Visualization**
+  - **User Growth Chart**: A line chart that shows the growth in the number of total users and active users over the past 12 months.
+  - **Revenue Distribution**: A pie chart that shows the breakdown of revenue from different sources (e.g., Subscriptions, Ads).
+  - **Top 5 Streamed Songs**: A bar chart that displays the top 5 most-streamed songs over the past 30 days.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Data Table**
+  - A table that lists detailed information about recent streams with the following columns:
+    - Song Name
+    - Artist
+    - Date Streamed
+    - Stream Count
+    - User ID
 
-### `npm test`
+### User Interaction
+- **Sorting and Filtering**: The data table includes sorting and filtering functionalities, allowing users to sort by date or stream count, and filter by artist or song name.
+- **Chart Interactions**: Users can interact with the charts, such as hovering over points on the line chart to see exact numbers or clicking on a segment of the pie chart to filter the data table by that revenue source.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Design & UX
+- The dashboard is responsive and adapts to various screen sizes.
+- It follows a modern design language with a focus on usability and clarity, utilizing TailwindCSS for styling.
 
-### `npm run build`
+## Project Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
+Make sure you have the following installed on your machine:
+- **Node.js** (version 14 or later)
+- **npm** (Node Package Manager) or **yarn**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Installation
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/streamify-dashboard.git
+   cd streamify-dashboard
+   npm install
+    # or
+    yarn install
