@@ -1,14 +1,12 @@
 import React, { Suspense, lazy } from 'react';
-import streams from '../../data/mockData';
-import Spinner from './components/Spinner';
-
-// Lazy load components
-const MetricsCard = lazy(() => import('./components/MetricsCard'));
-const DataTable = lazy(() => import('./components/DataTable'));
-const TopSongsChart = lazy(() => import('./components/TopSongsChart'));
-const RevenueDistributionChart = lazy(() => import('./components/RevenueDistributionChart'));
-const UserGrowthChart = lazy(() => import('./components/UserGrowthChart'));
-const Layout = lazy(() => import('./components/Layout'));
+import streams from '../data/mockData';
+import Spinner from './Spinner';
+const MetricsCard = lazy(() => import('./MetricsCard'));
+const DataTable = lazy(() => import('./DataTable'));
+const TopSongsChart = lazy(() => import('./TopSongsChart'));
+const RevenueDistributionChart = lazy(() => import('./RevenueDistributionChart'));
+const UserGrowthChart = lazy(() => import('./UserGrowthChart'));
+const Layout = lazy(() => import('./Layout'));
 
 function Dashboard() {
   return (
