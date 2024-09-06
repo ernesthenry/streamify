@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const DataTable = () => {
   const streams = useSelector((state) => state.streams);
-  const [sortConfig, setSortConfig] = React.useState({ key: 'dateStreamed', direction: 'ascending' });
+  const [filter, setFilter] = useState('');
+  const [sortConfig, setSortConfig] = useState({ key: 'dateStreamed', direction: 'ascending' });
 
-  const sortedStreams = [...streams].sort((a, b) => {
+  const filteredStreams = streams.filter((stream) =>
+    stream.songName.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const sortedStreams = [...filteredStreams].sort((a, b) => {
     if (a[sortConfig.key] < b[sortConfig.key]) {
       return sortConfig.direction === 'ascending' ? -1 : 1;
     }
@@ -26,6 +31,13 @@ const DataTable = () => {
   return (
     <div className="bg-white shadow rounded-lg p-4">
       <h2 className="text-lg font-semibold text-gray-700 mb-4">Recent Streams</h2>
+      <input
+        type="text"
+        placeholder="Filter by song name"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+        className="mb-4 p-2 border rounded"
+      />
       <table className="w-full text-left">
         <thead>
           <tr>
