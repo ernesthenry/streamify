@@ -25,7 +25,7 @@ function Dashboard() {
 
     // Calculate and set metrics
     const totalUsers = new Set(streams.map(stream => stream.userId)).size;
-    const activeUsers = totalUsers;  // Assuming all users are active; adjust if needed
+    const activeUsers = totalUsers;
     const totalStreams = streams.reduce((acc, stream) => acc + stream.streamCount, 0);
     const revenue = {
       subscriptions: 800000,

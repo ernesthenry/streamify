@@ -8,6 +8,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const UserGrowthChart = () => {
   const { totalUsersByMonth, activeUsersByMonth } = useSelector((state) => state.metrics);
+  console.log('totalUsersByMonth',totalUsersByMonth)
 
   // Provide default values if data is undefined
   const defaultMonthlyData = new Array(12).fill(0);
