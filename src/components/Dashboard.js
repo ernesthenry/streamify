@@ -44,7 +44,6 @@ function Dashboard() {
     streams.forEach(stream => {
       const month = new Date(stream.dateStreamed).getMonth();
       monthlyTotals[month] += stream.streamCount;
-      // Assuming active users is the same; adjust if needed
       monthlyActive[month] += 1;
     });
 
@@ -62,7 +61,7 @@ function Dashboard() {
     // Set a delay to show the spinner if loading takes longer than expected
     const timer = setTimeout(() => {
       setShowSpinner(false);
-    }, 300); // Adjust the delay as needed (300ms here)
+    }, 300); 
 
     // Clear the timer if component unmounts before the delay
     return () => clearTimeout(timer);
