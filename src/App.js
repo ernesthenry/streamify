@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard';
 const App = () => (
   <Router>
     <Routes>
-      <Route path="/" component={Dashboard} exact />
+      <Route path="/" element={<Dashboard />} />
     </Routes>
   </Router>
 );

@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 const DataTable = () => {
-  const streams = useSelector((state) => state.streams);
+  const streams = useSelector((state) => state.streams || []); // Ensuring streams is always an array
   const [filter, setFilter] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: 'dateStreamed', direction: 'ascending' });
 
-  const filteredStreams = streams.filter((stream) =>
-    stream.songName.toLowerCase().includes(filter.toLowerCase())
-  );
+  // Filtered streams, memoized for performance optimization
+  const filteredStreams = useMemo(() => {
+    return streams.filter((stream) => 
+      stream.songName.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [streams, filter]);
 
-  const sortedStreams = [...filteredStreams].sort((a, b) => {
-    if (a[sortConfig.key] < b[sortConfig.key]) {
-      return sortConfig.direction === 'ascending' ? -1 : 1;
-    }
-    if (a[sortConfig.key] > b[sortConfig.key]) {
-      return sortConfig.direction === 'ascending' ? 1 : -1;
-    }
-    return 0;
-  });
+  // Sorted streams, memoized for performance optimization
+  const sortedStreams = useMemo(() => {
+    const sortedArray = [...filteredStreams];
+    sortedArray.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? 1 : -1;
+      }
+      return 0;
+    });
+    return sortedArray;
+  }, [filteredStreams, sortConfig]);
 
   const requestSort = (key) => {
     let direction = 'ascending';
@@ -26,6 +34,13 @@ const DataTable = () => {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
+  };
+
+  const getSortIndicator = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === 'ascending' ? '↑' : '↓';
+    }
+    return null;
   };
 
   return (
@@ -41,23 +56,39 @@ const DataTable = () => {
       <table className="w-full text-left">
         <thead>
           <tr>
-            <th onClick={() => requestSort('songName')} className="cursor-pointer">Song Name</th>
-            <th onClick={() => requestSort('artist')} className="cursor-pointer">Artist</th>
-            <th onClick={() => requestSort('dateStreamed')} className="cursor-pointer">Date Streamed</th>
-            <th onClick={() => requestSort('streamCount')} className="cursor-pointer">Stream Count</th>
-            <th onClick={() => requestSort('userId')} className="cursor-pointer">User ID</th>
+            <th onClick={() => requestSort('songName')} className="cursor-pointer">
+              Song Name {getSortIndicator('songName')}
+            </th>
+            <th onClick={() => requestSort('artist')} className="cursor-pointer">
+              Artist {getSortIndicator('artist')}
+            </th>
+            <th onClick={() => requestSort('dateStreamed')} className="cursor-pointer">
+              Date Streamed {getSortIndicator('dateStreamed')}
+            </th>
+            <th onClick={() => requestSort('streamCount')} className="cursor-pointer">
+              Stream Count {getSortIndicator('streamCount')}
+            </th>
+            <th onClick={() => requestSort('userId')} className="cursor-pointer">
+              User ID {getSortIndicator('userId')}
+            </th>
           </tr>
         </thead>
         <tbody>
-          {sortedStreams.map((stream) => (
-            <tr key={stream.id}>
-              <td>{stream.songName}</td>
-              <td>{stream.artist}</td>
-              <td>{stream.dateStreamed}</td>
-              <td>{stream.streamCount}</td>
-              <td>{stream.userId}</td>
+          {sortedStreams.length > 0 ? (
+            sortedStreams.map((stream) => (
+              <tr key={stream.id}>
+                <td>{stream.songName}</td>
+                <td>{stream.artist}</td>
+                <td>{stream.dateStreamed}</td>
+                <td>{stream.streamCount}</td>
+                <td>{stream.userId}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5" className="text-center text-gray-500">No streams found</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
