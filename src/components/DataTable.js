@@ -51,7 +51,7 @@ const DataTable = () => {
         placeholder="Filter by song name"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        className="mb-4 p-2 border rounded"
+        className="mb-4 p-2 w-100 border rounded w-full"
       />
       <table className="w-full text-left">
         <thead>
