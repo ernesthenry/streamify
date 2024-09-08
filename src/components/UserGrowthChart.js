@@ -9,18 +9,21 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const UserGrowthChart = () => {
   const { totalUsersByMonth, activeUsersByMonth } = useSelector((state) => state.metrics);
 
+  // Provide default values if data is undefined
+  const defaultMonthlyData = new Array(12).fill(0);
+
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     datasets: [
       {
         label: 'Total Users',
-        data: totalUsersByMonth,
+        data: totalUsersByMonth || defaultMonthlyData,  // Use default values if data is not available
         borderColor: '#6366F1',
         fill: false,
       },
       {
         label: 'Active Users',
-        data: activeUsersByMonth,
+        data: activeUsersByMonth || defaultMonthlyData,  // Use default values if data is not available
         borderColor: '#10B981',
         fill: false,
       },

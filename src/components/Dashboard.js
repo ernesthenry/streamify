@@ -25,11 +25,11 @@ function Dashboard() {
 
     // Calculate and set metrics
     const totalUsers = new Set(streams.map(stream => stream.userId)).size;
-    const activeUsers = totalUsers; // Assuming all users are active for simplicity
+    const activeUsers = totalUsers;  // Assuming all users are active; adjust if needed
     const totalStreams = streams.reduce((acc, stream) => acc + stream.streamCount, 0);
     const revenue = {
-      subscriptions: 800000, // Example static value; replace with actual data if available
-      ads: 400000, // Example static value; replace with actual data if available
+      subscriptions: 800000,
+      ads: 400000,
     };
     const topArtist = streams.reduce((acc, stream) => {
       acc[stream.artist] = (acc[stream.artist] || 0) + stream.streamCount;
@@ -37,18 +37,26 @@ function Dashboard() {
     }, {});
     const topArtistName = Object.keys(topArtist).reduce((a, b) => topArtist[a] > topArtist[b] ? a : b, '');
 
-    // Example data for totalUsersByMonth and activeUsersByMonth
-    const totalUsersByMonth = new Array(12).fill(totalUsers / 12); 
-    const activeUsersByMonth = new Array(12).fill(activeUsers / 12);
+    // Calculate monthly totals
+    const monthlyTotals = new Array(12).fill(0);
+    const monthlyActive = new Array(12).fill(0);
 
+    streams.forEach(stream => {
+      const month = new Date(stream.dateStreamed).getMonth();
+      monthlyTotals[month] += stream.streamCount;
+      // Assuming active users is the same; adjust if needed
+      monthlyActive[month] += 1;
+    });
+
+    // Update metrics with correctly calculated data
     dispatch(setMetrics({
       totalUsers,
       activeUsers,
       totalStreams,
       revenue,
       topArtist: topArtistName,
-      totalUsersByMonth,
-      activeUsersByMonth,
+      totalUsersByMonth: monthlyTotals,
+      activeUsersByMonth: monthlyActive,
     }));
 
     // Set a delay to show the spinner if loading takes longer than expected
